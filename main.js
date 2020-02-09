@@ -1,7 +1,6 @@
 var person = {
   name: "John",
   surname: "Doe",
-  married: true,
   age: 30,
   info: {
     married: false,
@@ -15,6 +14,7 @@ var person = {
 };
 
 Object.prototype.iterate = function(condition, callback, all = true) {
+  
   function expand(object) {
     for (key in object) {
       if (condition(object, key)) {
@@ -27,11 +27,10 @@ Object.prototype.iterate = function(condition, callback, all = true) {
   }
 
   expand(this);
-  delete this.field;
 };
 
 person.iterate(
   (object, key) => key == "street",
-  (object, key) => (b = true),
-  (all = false)
+  (object, key) => object[key] = 'Other street',
+  all = false
 );
